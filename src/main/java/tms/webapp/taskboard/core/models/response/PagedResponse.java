@@ -15,4 +15,8 @@ public class PagedResponse<T> {
     public List<T> getItems() {
         return items;
     }
+
+    public static <T> PagedResponse<T> getInstance(final long total, final List<T> items)  {
+        return new PagedResponse<T>(total, items);
+    }
 }

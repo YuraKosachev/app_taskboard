@@ -1,4 +1,7 @@
 package tms.webapp.taskboard.core.interfaces.units.base;
 
-public interface PagedSelectUnit {
+import tms.webapp.taskboard.core.models.response.PagedResponse;
+
+public interface PagedSelectUnit<M,R> {
+    PagedResponse<R> getPagedByPredicate(M predicate);
 }

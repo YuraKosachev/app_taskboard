@@ -504,7 +504,7 @@
                                 <div class="flex flex-2 items-center justify-center sm:flex-auto sm:justify-end">
                                     <p
                                             class="ltr:mr-3 rtl:ml-3"
-                                            x-text="pager.startIndex+1 + '-' +( pager.endIndex+1) + ' of ' + filteredTasks.length"
+                                            x-text="pager.startIndex+1 + '-' +( pager.endIndex+1) + ' of ' + totalCount"
                                     ></p>
                                     <button
                                             type="button"
@@ -1117,21 +1117,23 @@
             notifications: [],
             messages: [],
             languages:[],
-
+            currentLang:'',
             initLanguages(){
                 fetch( '/api/languages', {
                     method: 'GET'
                 })
                     .then(response => response.json())
                     .then(result =>{
-                        this.languages = result;
+                        this.languages = result.langs;
+                        this.currentLang = result.current;
                     })
                     .catch(resons=>{
                         this.showMessage("something went wrong", 'error');
                     });
             },
-            setLanguage(lan){
-
+            setLanguage(lang){
+                let qurl = location.href.split('?')[0];
+                location.assign(`${'${'}qurl}?lang=${'${'}lang}`);
             },
             removeNotification(value) {
                 this.notifications = this.notifications.filter((d) => d.id !== value);
@@ -1155,6 +1157,7 @@
             filteredTasks: [],
             pagedTasks: [],
             searchTask: '',
+            totalCount:0,
             selectedTask: defaultParams,
 
             pager: {
@@ -1208,14 +1211,31 @@
                     alert(xhr.status + ': ' + xhr.statusText);
                 } else {
                     // вывести результат
-                    this.filteredTasks = JSON.parse(xhr.responseText);
+                    let paged = JSON.parse(xhr.responseText);
+                    this.filteredTasks = paged.items;
+                    this.totalCount = paged.total;
                     this.getPager();
                 }
 
             },
             getPager() {
                 setTimeout(() => {
-                    if (this.filteredTasks.length) {
+                    if (this.totalCount) {
+                        this.pager.totalPages = this.pager.pageSize < 1
+                            ? 1
+                            : Math.ceil(this.totalCount / this.pager.pageSize);
+                        if (this.pager.currentPage > this.pager.totalPages) {
+                            this.pager.currentPage = 1;
+                        }
+                        this.pager.startIndex = (this.pager.currentPage - 1) * this.pager.pageSize;
+                        this.pager.endIndex = Math.min(this.pager.startIndex + this.pager.pageSize - 1, this.filteredTasks.length - 1);
+                        this.pagedTasks = this.filteredTasks;//.slice(this.pager.startIndex, this.pager.endIndex + 1);
+                    } else {
+                        this.pagedTasks = [];
+                        this.pager.startIndex = -1;
+                        this.pager.endIndex = -1;
+                    }
+                    /*if (this.filteredTasks.length) {
                         this.pager.totalPages = this.pager.pageSize < 1
                             ? 1
                             : Math.ceil(this.filteredTasks.length / this.pager.pageSize);
@@ -1229,7 +1249,7 @@
                         this.pagedTasks = [];
                         this.pager.startIndex = -1;
                         this.pager.endIndex = -1;
-                    }
+                    }*/
                 });
             },
 

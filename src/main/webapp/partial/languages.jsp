@@ -2,10 +2,8 @@
 <%@ page import="tms.webapp.taskboard.core.constants.AppUrlConstants" %>
 <%@ page import="tms.webapp.taskboard.core.constants.CookieConstants" %>
 <%@ page import="java.util.Optional" %>
-<%@ page import="tms.webapp.taskboard.core.constants.LanguageConstants" %><%
-    Optional<Cookie> currentLocale = CookieUtils.getCookie(request, CookieConstants.LANG_COOKIE_VALUE);
-    String locale = currentLocale.isPresent() ? currentLocale.get().getValue() : LanguageConstants.EN;
-%>
+<%@ page import="tms.webapp.taskboard.core.constants.LanguageConstants" %>
+
 <div class="dropdown ms-auto w-max" x-data="dropdown" @click.outside="open = false">
     <a
             href="javascript:;"
@@ -15,12 +13,12 @@
     >
         <div>
             <img
-                    src="assets/images/flags/<%=locale.toUpperCase()%>.svg"
+                    :src="`assets/images/flags/${'${'}currentLang.toUpperCase()}.svg`"
                     alt="image"
                     class="h-5 w-5 rounded-full object-cover"
             />
         </div>
-        <div x-text="$store.app.locale" class="text-base font-bold uppercase"></div>
+        <div x-text="currentLang" class="text-base font-bold uppercase"></div>
         <span class="shrink-0" :class="{'rotate-180' : open}">
                                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -37,17 +35,22 @@
             x-transition.duration.300ms
             class="top-11 grid w-[280px] grid-cols-2 gap-y-2 !px-2 font-semibold text-dark ltr:-right-14 rtl:-left-14 dark:text-white-dark dark:text-white-light/90 sm:ltr:-right-2 sm:rtl:-left-2"
     >
-        <% for(int i = 0,key = 1; i < LanguageConstants.LANGUAGES.length; i++, key++) {%>
+        <template x-for="item in languages">
             <li>
-                <a href="/registration?lang=<%=LanguageConstants.LANGUAGES[i]%>" class="hover:text-primary"
-                        :class="{'bg-primary/10 text-primary' : <%=locale%> == <%=LanguageConstants.LANGUAGES[i]%>}">
-
-                    <img class="h-5 w-5 rounded-full object-cover"
-                            src="assets/images/flags/<%=LanguageConstants.LANGUAGES[i].toUpperCase()%>.svg"
-                            alt="image"/>
-                    <span class="ltr:ml-3 rtl:mr-3"><%=LanguageConstants.LANGUAGES[i].toUpperCase()%></span>
+                <a
+                        href="javascript:;"
+                        class="hover:text-primary"
+                        @click="setLanguage(item.value),toggle()"
+                        :class="{'bg-primary/10 text-primary' : currentLang == item.value}"
+                >
+                    <img
+                            class="h-5 w-5 rounded-full object-cover"
+                            :src="`assets/images/flags/${'${'}item.value.toUpperCase()}.svg`"
+                            alt="image"
+                    />
+                    <span class="ltr:ml-3 rtl:mr-3" x-text="item.key"></span>
                 </a>
             </li>
-    <%}%>
+        </template>
     </ul>
 </div>

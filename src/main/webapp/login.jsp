@@ -232,6 +232,27 @@
                 document.documentElement.scrollTop = 0;
             },
         }));
+        Alpine.data('auth', () => ({
+            languages: [],
+            currentLang:'',
+            init() {
+                fetch( '/api/languages', {
+                    method: 'GET'
+                })
+                    .then(response => response.json())
+                    .then(result =>{
+                        this.languages = result.langs;
+                        this.currentLang = result.current;
+                    })
+                    .catch(resons=>{
+                        this.showMessage("something went wrong", 'error');
+                    });
+            },
+            setLanguage(lang) {
+                let qurl = location.href.split('?')[0];
+                location.assign(`${'${'}qurl}?lang=${'${'}lang}`);
+            }
+        }));
 
     });
 </script>

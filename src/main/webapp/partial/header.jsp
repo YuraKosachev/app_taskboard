@@ -91,7 +91,7 @@
                             @click="toggle"
                     >
                         <img
-                                :src="`images/flags/${$store.app.locale.toUpperCase()}.svg`"
+                                :src="`assets/images/flags/${'${'}currentLang.toUpperCase()}.svg`"
                                 alt="image"
                                 class="h-5 w-5 rounded-full object-cover"
                         />
@@ -108,12 +108,12 @@
                                 <a
                                         href="javascript:;"
                                         class="hover:text-primary"
-                                        @click="$store.app.toggleLocale(item.value),toggle()"
-                                        :class="{'bg-primary/10 text-primary' : $store.app.locale == item.value}"
+                                        @click="setLanguage(item.value),toggle()"
+                                        :class="{'bg-primary/10 text-primary' : currentLang == item.value}"
                                 >
                                     <img
                                             class="h-5 w-5 rounded-full object-cover"
-                                            :src="`images/flags/${item.value.toUpperCase()}.svg`"
+                                            :src="`assets/images/flags/${'${'}item.value.toUpperCase()}.svg`"
                                             alt="image"
                                     />
                                     <span class="ltr:ml-3 rtl:mr-3" x-text="item.key"></span>

@@ -25,7 +25,7 @@ public class AuthorizeFilter extends HttpFilter {
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String requestUrl = request.getRequestURI();
 
-        if (Arrays.stream(AppUrlConstants.UNAUTHORIZED_URLS).anyMatch(src -> requestUrl.startsWith(src))) {
+        if (Arrays.stream(AppUrlConstants.UNAUTHORIZED_URLS).anyMatch(requestUrl::startsWith)) {
             chain.doFilter(request, response);
             return;
         }

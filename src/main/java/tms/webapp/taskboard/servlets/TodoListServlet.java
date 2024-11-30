@@ -18,6 +18,7 @@ import tms.webapp.taskboard.core.interfaces.services.TaskService;
 import tms.webapp.taskboard.core.models.datetime.DateRange;
 import tms.webapp.taskboard.core.models.entities.task.Task;
 import tms.webapp.taskboard.core.models.entities.task.TaskPredicate;
+import tms.webapp.taskboard.core.models.response.PagedResponse;
 import tms.webapp.taskboard.core.utils.JsonConverter;
 import tms.webapp.taskboard.factories.ServiceFactory;
 
@@ -37,7 +38,7 @@ public class TodoListServlet extends HttpServlet {
         TaskService taskService = ServiceFactory.getTaskService();
         TaskPredicate predicate = buildTaskPredicate(req);
 
-        List<Task> tasks = taskService.getByPredicate(predicate);
+        PagedResponse<Task> tasks = taskService.getPagedByPredicate(predicate);
         resp.setContentType(ContentType.APPLICATION_JSON.toString());
         resp.setCharacterEncoding("UTF-8");
 
@@ -50,10 +51,7 @@ public class TodoListServlet extends HttpServlet {
     private TaskPredicate buildTaskPredicate(HttpServletRequest request) throws CustomAuthorizationExcetion {
         Optional<UUID> objId = Optional.ofNullable((UUID) request.getAttribute("userid"));
 
-        if (objId.isEmpty()) {
-            throw new CustomAuthorizationExcetion("User not found!");
-        }
-        UUID userId = objId.get();
+        UUID userId = objId.orElse(null);
         String search = request.getParameter("searchTerm");
         TaskPriority[] priorities = null;
         TaskStatus[] status = null;

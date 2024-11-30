@@ -36,7 +36,9 @@ public final class ServiceFactory {
                 new TaskDeleteUnitImpl(DbConnectorImpl.getInstance()),
                 new TaskInsertUnitImpl(DbConnectorImpl.getInstance()),
                 new TaskSetPriorityUpdateUnitImpl(DbConnectorImpl.getInstance()),
-                new TaskSetStatusUpdateUnitImpl(DbConnectorImpl.getInstance()));
+                new TaskSetStatusUpdateUnitImpl(DbConnectorImpl.getInstance()),
+                new TaskPagedSelectUnitImpl(DbConnectorImpl.getInstance())
+        );
     }
 
     public static LanguageService getLanguageService() throws IOException {
