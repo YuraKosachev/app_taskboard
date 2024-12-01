@@ -39,7 +39,8 @@ public final class ServiceFactory {
                 new TaskInsertUnitImpl(DbConnectorImpl.getInstance()),
                 new TaskSetPriorityUpdateUnitImpl(DbConnectorImpl.getInstance()),
                 new TaskSetStatusUpdateUnitImpl(DbConnectorImpl.getInstance()),
-                new TaskPagedSelectUnitImpl(DbConnectorImpl.getInstance())
+                new TaskPagedSelectUnitImpl(DbConnectorImpl.getInstance()),
+                new CountTaskUnitImpl(DbConnectorImpl.getInstance())
         );
     }
 

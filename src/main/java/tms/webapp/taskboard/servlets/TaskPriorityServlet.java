@@ -10,7 +10,6 @@ import tms.webapp.taskboard.core.constants.ServletNameConstants;
 import tms.webapp.taskboard.core.enums.ContentType;
 import tms.webapp.taskboard.core.interfaces.services.TaskService;
 import tms.webapp.taskboard.core.models.properties.PriorityPropertyChange;
-import tms.webapp.taskboard.core.models.properties.StatusPropertyChange;
 import tms.webapp.taskboard.core.models.response.BaseResponse;
 import tms.webapp.taskboard.core.utils.JsonConverter;
 import tms.webapp.taskboard.core.utils.RequestUtils;
@@ -31,10 +30,10 @@ public class TaskPriorityServlet extends HttpServlet {
             PriorityPropertyChange taskPriority = RequestUtils.getRequestBody(req, PriorityPropertyChange.class);
 
             taskService.setPriority(taskPriority.getEntityId(),taskPriority.getValue());
-            resp.setStatus(200);
+            resp.setStatus(HttpServletResponse.SC_OK);
 
         } catch (Exception e) {
-            resp.setStatus(400);
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             baseResponse = BaseResponse.getInstance(false, e.getMessage());
         } finally {
             try (PrintWriter pw = resp.getWriter()) {

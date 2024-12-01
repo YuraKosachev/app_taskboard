@@ -4,6 +4,7 @@ public final class AppUrlConstants {
     private static final String JSP_FORMAT = "%s.jsp";
     public static final String LOGIN_URL = "/login";
     public static final String TODOLIST_URL = "/api/todolist";
+    public static final String TASK_COUNT_URL = "/api/task/count";
     public static final String TASK_URL = "/api/task";
     public static final String TASK_STATUS_URL = "/api/task/status";
     public static final String TASK_PRIORITY_URL = "/api/task/priority";

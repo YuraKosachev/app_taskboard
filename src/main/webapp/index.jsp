@@ -172,7 +172,7 @@
                                         </div>
                                         <div
                                                 class="whitespace-nowrap rounded-md bg-primary-light py-0.5 px-2 font-semibold dark:bg-[#060818]"
-                                                x-text="allTasks && allTasks.filter((d) => d.status != 'Deleted').length"
+                                                x-text="allTaskCount"
                                         ></div>
                                     </button>
                                     <button
@@ -204,9 +204,8 @@
                                         </div>
                                         <div
                                                 class="whitespace-nowrap rounded-md bg-primary-light py-0.5 px-2 font-semibold dark:bg-[#060818]"
-                                                x-text="allTasks && allTasks.filter((d) => d.status === 'Done').length"
+                                                x-text="taskCounter['DONE'] === undefined ? 0 : taskCounter['DONE']"
                                         >
-                                            2
                                         </div>
                                     </button>
                                     <button
@@ -234,7 +233,7 @@
                                         </div>
                                         <div
                                                 class="whitespace-nowrap rounded-md bg-primary-light py-0.5 px-2 font-semibold dark:bg-[#060818]"
-                                                x-text="allTasks && allTasks.filter((d) => d.status === 'InProgress').length"
+                                                x-text="taskCounter['INPROGRESS'] === undefined ? 0 : taskCounter['INPROGRESS']"
                                         ></div>
                                     </button>
 
@@ -279,6 +278,11 @@
                                             </svg>
                                             <div class="ltr:ml-3 rtl:mr-3"><%=translationService.translate("Todo")%></div>
                                         </div>
+                                        <div
+                                                class="whitespace-nowrap rounded-md bg-primary-light py-0.5 px-2 font-semibold dark:bg-[#060818]"
+                                                x-text="taskCounter['TODO'] === undefined ? 0 : taskCounter['TODO']"
+                                        >
+                                        </div>
                                     </button>
 
                                     <button
@@ -322,6 +326,13 @@
                                             </svg>
                                             <div class="ltr:ml-3 rtl:mr-3"><%=translationService.translate("Garbage")%></div>
                                         </div>
+
+                                        <div
+                                                class="whitespace-nowrap rounded-md bg-primary-light py-0.5 px-2 font-semibold dark:bg-[#060818]"
+                                                x-text="taskCounter['DELETED'] === undefined ? 0 : taskCounter['DELETED']"
+                                        >
+                                        </div>
+
                                     </button>
                                     <div class="h-px w-full border-b border-[#e0e6ed] dark:border-[#1b2e4b]"></div>
                                     <div class="px-1 py-3 text-white-dark"><%=translationService.translate("Tags")%></div>
@@ -1073,6 +1084,7 @@
         "Medium":"<%=translationService.translate("Medium")%>",
         "High":"<%=translationService.translate("High")%>"
     };
+
     const defaultParams = {
         id: null,
         title: '',
@@ -1129,7 +1141,6 @@
             notifications: [],
             messages: [],
             languages:[],
-
             currentLang:'',
             initLanguages(){
                 fetch( '/api/languages', {
@@ -1168,6 +1179,8 @@
             params: JSON.parse(JSON.stringify(defaultParams)),
             allTasks: [],
             filteredTasks: [],
+            allTaskCount:0,
+            taskCounter:{},
             pagedTasks: [],
             searchTask: '',
             totalCount:0,
@@ -1189,6 +1202,25 @@
                 this.quillEditor = new Quill(this.$refs.editor, {
                     theme: 'snow',
                 });
+            },
+            taskCountInfo(){
+                fetch( '/api/task/count', {
+                    method: 'GET',
+                })
+                    .then(response => response.json())
+                    .then(result =>{
+                        if(result.success){
+                            this.taskCounter = JSON.parse(result.message);
+                            this.countCalculate();
+                            return;
+                        }
+                        this.showMessage(result.message, 'error');
+                        return false;
+                    })
+                    .catch(resons=>{
+                        this.showMessage(resons.message, 'error');
+                        return false;
+                    });
             },
             searchTasks(isResetPage = true) {
                 if (isResetPage) {
@@ -1227,6 +1259,8 @@
                     this.filteredTasks = paged.items;
                     this.totalCount = paged.total;
                     this.getPager();
+                    this.taskCountInfo();
+
                 }
 
             },
@@ -1263,6 +1297,15 @@
                         this.pager.endIndex = -1;
                     }*/
                 });
+            },
+
+            countCalculate(){
+                this.allTaskCount = 0;
+                let arr = Object.values(this.taskCounter);
+                for (let i = 0; i < arr.length; i++) {
+                    console.log(arr[i]);
+                    this.allTaskCount += arr[i];
+                }
             },
 
             setPriority(task, name) {

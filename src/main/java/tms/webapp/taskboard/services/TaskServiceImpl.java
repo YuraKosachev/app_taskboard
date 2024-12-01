@@ -8,6 +8,7 @@ import tms.webapp.taskboard.core.models.entities.task.*;
 import tms.webapp.taskboard.core.models.response.PagedResponse;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class TaskServiceImpl implements TaskService {
@@ -18,6 +19,7 @@ public class TaskServiceImpl implements TaskService {
     private final InsertUnit<TaskCreate> insertUnit;
     private final UpdateUnit<TaskPriorityUpdate> priorityUpdateUnit;
     private final UpdateUnit<TaskStatusUpdate> statusUpdateUnit;
+    private final FindUnit<TaskCountRequest, Map<TaskStatus, Integer>> countStatusUnit;
 
     public TaskServiceImpl(SelectUnit<TaskPredicate, Task> selectUnit,
                            UpdateUnit<Task> updateUnit,
@@ -25,7 +27,8 @@ public class TaskServiceImpl implements TaskService {
                            InsertUnit<TaskCreate> insertUnit,
                            UpdateUnit<TaskPriorityUpdate> priorityUpdateUnit,
                            UpdateUnit<TaskStatusUpdate> statusUpdateUnit,
-                           PagedSelectUnit<TaskPredicate,Task> pagedSelectUnit) {
+                           PagedSelectUnit<TaskPredicate,Task> pagedSelectUnit,
+                           FindUnit<TaskCountRequest, Map<TaskStatus, Integer>> countStatusUnit) {
 
         this.selectUnit = selectUnit;
         this.updateUnit = updateUnit;
@@ -34,8 +37,14 @@ public class TaskServiceImpl implements TaskService {
         this.priorityUpdateUnit = priorityUpdateUnit;
         this.statusUpdateUnit = statusUpdateUnit;
         this.pagedSelectUnit = pagedSelectUnit;
+        this.countStatusUnit = countStatusUnit;
     }
 
+
+    @Override
+    public Map<TaskStatus, Integer> getCountStatuse(TaskCountRequest request) {
+        return countStatusUnit.find(request);
+    }
 
     @Override
     public int create(TaskCreate task) {

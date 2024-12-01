@@ -1,6 +1,7 @@
 package tms.webapp.taskboard.core.constants;
 
 public final class ServletNameConstants {
+    public static final String TASK_COUNT="SERVLET_TASK_COUNT";
     public static final String LOGIN = "SERVLET_LOGIN";
     public static final String LANGUAGE = "SERVLET_LANGUAGE";
     public static final String TASK_STATUS = "SERVLET_TASK_STATUS";

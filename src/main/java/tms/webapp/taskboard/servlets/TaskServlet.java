@@ -60,10 +60,10 @@ public class TaskServlet extends HttpServlet {
             TaskService taskService = ServiceFactory.getTaskService();
 
             taskService.delete(uuid);
-            resp.setStatus(200);
+            resp.setStatus(HttpServletResponse.SC_OK);
 
         } catch (Exception e) {
-            resp.setStatus(400);
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             boolResponse = BaseResponse.getInstance(false, e.getMessage());
         } finally {
             try (PrintWriter pw = resp.getWriter()) {
