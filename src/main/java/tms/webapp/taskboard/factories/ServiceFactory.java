@@ -1,6 +1,8 @@
 package tms.webapp.taskboard.factories;
 
 import tms.webapp.taskboard.core.interfaces.services.*;
+import tms.webapp.taskboard.core.interfaces.store.LocalizationStore;
+import tms.webapp.taskboard.core.store.LocalizationStoreImpl;
 import tms.webapp.taskboard.services.*;
 import tms.webapp.taskboard.units.db.DbConnectorImpl;
 import tms.webapp.taskboard.units.migration.MigrationInsertUnitImpl;
@@ -43,5 +45,9 @@ public final class ServiceFactory {
 
     public static LanguageService getLanguageService() throws IOException {
         return new LanguageServiceImpl();
+    }
+
+    public static TranslationService getTranslationService() throws IOException {
+        return new TranslationServiceImpl(LocalizationStoreImpl.getInstance());
     }
 }

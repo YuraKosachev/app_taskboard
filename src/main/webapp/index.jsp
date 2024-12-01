@@ -1,4 +1,11 @@
+<%@ page import="tms.webapp.taskboard.core.interfaces.services.TranslationService" %>
+<%@ page import="tms.webapp.taskboard.factories.ServiceFactory" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<%
+    TranslationService translationService = ServiceFactory.getTranslationService();
+    translationService.setLocale((String)request.getAttribute("language"));
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -111,7 +118,7 @@
                                             />
                                         </svg>
                                     </div>
-                                    <h3 class="text-lg font-semibold ltr:ml-3 rtl:mr-3">Todo list</h3>
+                                    <h3 class="text-lg font-semibold ltr:ml-3 rtl:mr-3"><%=translationService.translate("Todo list")%></h3>
                                 </div>
                             </div>
                             <div class="mb-5 h-px w-full border-b border-[#e0e6ed] dark:border-[#1b2e4b]"></div>
@@ -161,7 +168,7 @@
                                                 <path d="M22 5L12 5" stroke="currentColor" stroke-width="1.5"
                                                       stroke-linecap="round"/>
                                             </svg>
-                                            <div class="ltr:ml-3 rtl:mr-3">All</div>
+                                            <div class="ltr:ml-3 rtl:mr-3"><%=translationService.translate("All")%></div>
                                         </div>
                                         <div
                                                 class="whitespace-nowrap rounded-md bg-primary-light py-0.5 px-2 font-semibold dark:bg-[#060818]"
@@ -193,7 +200,7 @@
                                                         fill="currentColor"
                                                 />
                                             </svg>
-                                            <div class="ltr:ml-3 rtl:mr-3">Done</div>
+                                            <div class="ltr:ml-3 rtl:mr-3"><%=translationService.translate("Done")%></div>
                                         </div>
                                         <div
                                                 class="whitespace-nowrap rounded-md bg-primary-light py-0.5 px-2 font-semibold dark:bg-[#060818]"
@@ -223,7 +230,7 @@
                                                         stroke-width="1.5"
                                                 />
                                             </svg>
-                                            <div class="ltr:ml-3 rtl:mr-3">InProgress</div>
+                                            <div class="ltr:ml-3 rtl:mr-3"><%=translationService.translate("InProgress")%></div>
                                         </div>
                                         <div
                                                 class="whitespace-nowrap rounded-md bg-primary-light py-0.5 px-2 font-semibold dark:bg-[#060818]"
@@ -270,7 +277,7 @@
                                                         stroke-width="1.5"
                                                 />
                                             </svg>
-                                            <div class="ltr:ml-3 rtl:mr-3">Todo</div>
+                                            <div class="ltr:ml-3 rtl:mr-3"><%=translationService.translate("Todo")%></div>
                                         </div>
                                     </button>
 
@@ -313,11 +320,11 @@
                                                         stroke-width="1.5"
                                                 />
                                             </svg>
-                                            <div class="ltr:ml-3 rtl:mr-3">Garbage</div>
+                                            <div class="ltr:ml-3 rtl:mr-3"><%=translationService.translate("Garbage")%></div>
                                         </div>
                                     </button>
                                     <div class="h-px w-full border-b border-[#e0e6ed] dark:border-[#1b2e4b]"></div>
-                                    <div class="px-1 py-3 text-white-dark">Tags</div>
+                                    <div class="px-1 py-3 text-white-dark"><%=translationService.translate("Tags")%></div>
                                     <button
                                             type="button"
                                             class="flex h-10 w-full items-center rounded-md p-1 font-medium text-gray-app duration-300 hover:bg-white-dark/10 ltr:hover:pl-3 rtl:hover:pr-3 dark:hover:bg-[#181F32]"
@@ -338,7 +345,7 @@
                                                     stroke-width="1.5"
                                             />
                                         </svg>
-                                        <div class="ltr:ml-3 rtl:mr-3">All</div>
+                                        <div class="ltr:ml-3 rtl:mr-3"><%=translationService.translate("All")%></div>
                                     </button>
                                     <button
                                             type="button"
@@ -360,7 +367,7 @@
                                                     stroke-width="1.5"
                                             />
                                         </svg>
-                                        <div class="ltr:ml-3 rtl:mr-3">Low</div>
+                                        <div class="ltr:ml-3 rtl:mr-3"><%=translationService.translate("Low")%></div>
                                     </button>
 
                                     <button
@@ -383,7 +390,7 @@
                                                     stroke-width="1.5"
                                             />
                                         </svg>
-                                        <div class="ltr:ml-3 rtl:mr-3">Medium</div>
+                                        <div class="ltr:ml-3 rtl:mr-3"><%=translationService.translate("Medium")%></div>
                                     </button>
 
                                     <button
@@ -406,7 +413,7 @@
                                                     stroke-width="1.5"
                                             />
                                         </svg>
-                                        <div class="ltr:ml-3 rtl:mr-3">High</div>
+                                        <div class="ltr:ml-3 rtl:mr-3"><%=translationService.translate("High")%></div>
                                     </button>
                                 </div>
                             </div>
@@ -427,7 +434,7 @@
                                         <line x1="12" y1="5" x2="12" y2="19"></line>
                                         <line x1="5" y1="12" x2="19" y2="12"></line>
                                     </svg>
-                                    Add New Task
+                                    <%=translationService.translate("Add New Task")%>
                                 </button>
                             </div>
                         </div>
@@ -460,7 +467,7 @@
                                         <input
                                                 type="text"
                                                 class="peer form-input ltr:!pr-10 rtl:!pl-10"
-                                                placeholder="Search Task..."
+                                                placeholder="<%=translationService.translate("Search Task...")%>"
                                                 x-model="searchTask"
                                                 @keyup="searchTasks()"
                                         />
@@ -504,7 +511,7 @@
                                 <div class="flex flex-2 items-center justify-center sm:flex-auto sm:justify-end">
                                     <p
                                             class="ltr:mr-3 rtl:ml-3"
-                                            x-text="pager.startIndex+1 + '-' +( pager.endIndex+1) + ' of ' + totalCount"
+                                            x-text="pager.startIndex+1 + '-' +( pager.endIndex+1) + ' <%=translationService.translate("of")%> ' + totalCount"
                                     ></p>
                                     <button
                                             type="button"
@@ -597,7 +604,7 @@
                                                                 <button
                                                                         type="button"
                                                                         class="badge rounded-full capitalize hover:top-0 hover:text-white"
-                                                                        x-text="task.priority"
+                                                                        x-text='translate[task.priority]'
                                                                         :class="{
                                                                         'badge-outline-primary hover:bg-primary': task.priority === 'Medium',
                                                                         'badge-outline-warning hover:bg-warning': task.priority === 'Low',
@@ -620,7 +627,7 @@
                                                                                 class="w-full text-danger ltr:text-left rtl:text-right"
                                                                                 @click="toggle,setPriority(task, 'High')"
                                                                         >
-                                                                            High
+                                                                            <%=translationService.translate("High")%>
                                                                         </button>
                                                                     </li>
                                                                     <li>
@@ -628,7 +635,7 @@
                                                                                 class="w-full text-primary ltr:text-left rtl:text-right"
                                                                                 @click="toggle,setPriority(task, 'Medium')"
                                                                         >
-                                                                            Medium
+                                                                            <%=translationService.translate("Medium")%>
                                                                         </button>
                                                                     </li>
                                                                     <li>
@@ -636,7 +643,7 @@
                                                                                 class="w-full text-warning ltr:text-left rtl:text-right"
                                                                                 @click="toggle,setPriority(task, 'Low')"
                                                                         >
-                                                                            Low
+                                                                                <%=translationService.translate("Low")%>
                                                                         </button>
                                                                     </li>
                                                                 </ul>
@@ -719,7 +726,7 @@
                                                                                         stroke-width="1.5"
                                                                                 />
                                                                             </svg>
-                                                                            Edit
+                                                                            <%=translationService.translate("Edit")%>
                                                                         </a>
                                                                     </li>
                                                                     <li>
@@ -766,7 +773,7 @@
                                                                                         stroke-width="1.5"
                                                                                 ></path>
                                                                             </svg>
-                                                                            Delete</a
+                                                                                <%=translationService.translate("Delete")%></a
                                                                         >
                                                                     </li>
                                                                     <li>
@@ -787,7 +794,7 @@
                                                                                 ></path>
                                                                             </svg>
                                                                             <span
-                                                                                    x-text="task.status === 'InProgress' ? 'To do' : 'In progress'"
+                                                                                    x-text="task.status === 'InProgress' ? '<%=translationService.translate("To do")%>' : '<%=translationService.translate("In progress")%>'"
                                                                             ></span>
                                                                         </a>
                                                                     </li>
@@ -847,7 +854,7 @@
                                                                                         stroke-width="1.5"
                                                                                 ></path>
                                                                             </svg>
-                                                                            Permanent Delete
+                                                                                <%=translationService.translate("Permanent Delete")%>
                                                                         </a>
                                                                     </li>
                                                                     <li>
@@ -877,7 +884,7 @@
                                                                                     </clipPath>
                                                                                 </defs>
                                                                             </svg>
-                                                                            Restore Task
+                                                                                <%=translationService.translate("Restore Task")%>
                                                                         </a>
                                                                     </li>
                                                                 </ul>
@@ -932,35 +939,34 @@
                                 </button>
                                 <div
                                         class="bg-[#fbfbfb] py-3 text-lg font-medium ltr:pl-5 ltr:pr-[50px] rtl:pr-5 rtl:pl-[50px] dark:bg-[#121c2c]"
-                                        x-text="params.id ? 'Edit Task' : 'Add Task'"
+                                        x-text="params.id ? '<%=translationService.translate("Edit Task")%>' : '<%=translationService.translate("Add Task")%>'"
                                 ></div>
                                 <div class="p-5">
                                     <form @submit.prevent="saveTask">
                                         <div class="mb-5">
-                                            <label for="title">Title</label>
-                                            <input id="title" type="text" placeholder="Enter Task Title"
+                                            <label for="title"><%=translationService.translate("Title")%></label>
+                                            <input id="title" type="text" placeholder="<%=translationService.translate("Enter Task Title")%>"
                                                    class="form-input" x-model="params.title"/>
                                         </div>
                                         <div class="mb-5">
-                                            <label for="priority">Priority</label>
+                                            <label for="priority"><%=translationService.translate("Priority")%></label>
                                             <select id="priority" class="form-select" x-model="params.priority">
-                                                <option value="">Select Priority</option>
-                                                <option value="Low">Low</option>
-                                                <option value="Medium">Medium</option>
-                                                <option value="High">High</option>
+                                                <option value=""><%=translationService.translate("Select Priority")%></option>
+                                                <option value="Low"><%=translationService.translate("Low")%></option>
+                                                <option value="Medium"><%=translationService.translate("Medium")%></option>
+                                                <option value="High"><%=translationService.translate("High")%></option>
                                             </select>
                                         </div>
                                         <div class="mb-5">
-                                            <label>Description</label>
+                                            <label><%=translationService.translate("Description")%></label>
                                             <div x-ref="editor"></div>
                                         </div>
                                         <div class="mt-8 flex items-center justify-end ltr:text-right rtl:text-left">
                                             <button type="button" class="btn btn-outline-danger"
-                                                    @click="addTaskModal = false">Cancel
+                                                    @click="addTaskModal = false"><%=translationService.translate("Cancel")%>
                                             </button>
                                             <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4"
-                                                    x-text="params.id ? 'Update' : 'Add'">
-                                                Add
+                                                    x-text="params.id ? '<%=translationService.translate("Update")%>' : '<%=translationService.translate("Add")%>'">
                                             </button>
                                         </div>
                                     </form>
@@ -1030,7 +1036,7 @@
 
                                     <div class="mt-8 flex items-center justify-end">
                                         <button type="button" class="btn btn-outline-danger"
-                                                @click="viewTaskModal = false">Close
+                                                @click="viewTaskModal = false"><%=translationService.translate("Close")%>
                                         </button>
                                     </div>
                                 </div>
@@ -1061,6 +1067,12 @@
 <script src="assets/js/custom.js"></script>
 <script src="assets/js/quill.js"></script>
 <script>
+
+    const translate = {
+        "Low":"<%=translationService.translate("Low")%>",
+        "Medium":"<%=translationService.translate("Medium")%>",
+        "High":"<%=translationService.translate("High")%>"
+    };
     const defaultParams = {
         id: null,
         title: '',
@@ -1117,6 +1129,7 @@
             notifications: [],
             messages: [],
             languages:[],
+
             currentLang:'',
             initLanguages(){
                 fetch( '/api/languages', {
@@ -1159,7 +1172,6 @@
             searchTask: '',
             totalCount:0,
             selectedTask: defaultParams,
-
             pager: {
                 currentPage: 1,
                 totalPages: 0,
@@ -1278,9 +1290,6 @@
                         this.showMessage(resons.message, 'error');
                         return false;
                     });
-
-
-
             },
 
             setTag(task, name) {
@@ -1289,11 +1298,6 @@
                 this.searchTasks(false);
             },
 
-            /*  tabChanged(type) {
-                  this.selectedTab = type;
-                  this.searchTasks();
-                  this.isShowTaskMenu = false;
-              },*/
 
             tabChanged(type, value) {
                 if (type === 'status') {
@@ -1332,10 +1336,6 @@
                         this.showMessage(resons.message, 'error');
                         return false;
                     });
-              //ddddd
-                //let item = this.filteredTasks.find((d) => d.id === task.id);
-                //item.status = item.status === 'complete' ? '' : 'complete';
-                //this.searchTasks(false);
             },
 
             setInProgress(task) {

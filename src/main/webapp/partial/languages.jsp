@@ -1,8 +1,3 @@
-<%@ page import="tms.webapp.taskboard.core.utils.CookieUtils" %>
-<%@ page import="tms.webapp.taskboard.core.constants.AppUrlConstants" %>
-<%@ page import="tms.webapp.taskboard.core.constants.CookieConstants" %>
-<%@ page import="java.util.Optional" %>
-<%@ page import="tms.webapp.taskboard.core.constants.LanguageConstants" %>
 
 <div class="dropdown ms-auto w-max" x-data="dropdown" @click.outside="open = false">
     <a

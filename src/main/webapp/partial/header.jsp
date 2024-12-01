@@ -1,6 +1,12 @@
 <%@ page import="com.google.gson.Gson" %>
 <%@ page import="tms.webapp.taskboard.core.interfaces.services.LanguageService" %>
 <%@ page import="tms.webapp.taskboard.factories.ServiceFactory" %>
+<%@ page import="tms.webapp.taskboard.core.interfaces.services.TranslationService" %>
+
+<%
+    TranslationService translationService = ServiceFactory.getTranslationService();
+    translationService.setLocale((String)request.getAttribute("language"));
+%>
 
 <header class="z-40" :class="{'dark' : $store.app.semidark && $store.app.menu === 'horizontal'}">
     <div class="shadow-sm">
@@ -10,7 +16,7 @@
                     <img class="inline w-8 ltr:-ml-1 rtl:-mr-1" src="assets/images/logo.svg" alt="image" />
                     <span
                             class="hidden align-middle text-2xl font-semibold transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light md:inline"
-                    >To Do list</span
+                    ><%=translationService.translate("To Do list")%></span
                     >
                 </a>
             </div>
@@ -172,7 +178,7 @@
                                             stroke-width="1.5"
                                     />
                                 </svg>
-                                Profile</a
+                                <%=translationService.translate("Profile")%></a
                             >
                         </li>
 
@@ -202,7 +208,7 @@
                                             stroke-linejoin="round"
                                     />
                                 </svg>
-                                Sign Out
+                                <%=translationService.translate("Sign Out")%>
                             </a>
                         </li>
                     </ul>

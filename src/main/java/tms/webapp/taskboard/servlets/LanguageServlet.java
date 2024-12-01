@@ -32,8 +32,7 @@ public class LanguageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LanguageService langService = ServiceFactory.getLanguageService();
         List<AlpinaLanguage> languages = langService.getAlpinaAvailableLanguage();
-        Optional<Cookie> cookie = CookieUtils.getCookie(req, CookieConstants.LANG_COOKIE_VALUE);
-        String currentLang = cookie.isPresent() ? cookie.get().getValue() : LanguageConstants.EN;
+        String currentLang = langService.getCurrentLanguage(req);
         LanguageResponse response = LanguageResponse.getInstance(currentLang, languages);
 
         resp.setContentType(ContentType.APPLICATION_JSON.toString());

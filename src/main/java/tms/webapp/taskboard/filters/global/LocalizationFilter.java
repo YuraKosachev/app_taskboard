@@ -32,6 +32,10 @@ public class LocalizationFilter extends HttpFilter {
             response.addCookie(newCookie);
         }
 
+        String language = lang.isPresent()
+                ? lang.get()
+                : langCookie.isPresent() ? langCookie.get().getValue() : lang.orElse(LanguageConstants.EN);
+        request.setAttribute("language", language);
         chain.doFilter(request,response);
     }
 }

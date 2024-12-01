@@ -1,4 +1,6 @@
-<%@ page import="tms.webapp.taskboard.core.constants.AppUrlConstants" %><%--
+<%@ page import="tms.webapp.taskboard.core.constants.AppUrlConstants" %>
+<%@ page import="tms.webapp.taskboard.factories.ServiceFactory" %>
+<%@ page import="tms.webapp.taskboard.core.interfaces.services.TranslationService" %><%--
   Created by IntelliJ IDEA.
   User: HP
   Date: 21.11.2024
@@ -6,6 +8,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    TranslationService translationService = ServiceFactory.getTranslationService();
+    translationService.setLocale((String)request.getAttribute("language"));
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,14 +111,14 @@
                     </div>
                     <div class="w-full max-w-[440px] lg:mt-16">
                         <div class="mb-10">
-                            <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl">Sign in</h1>
-                            <p class="text-base font-bold leading-normal text-white-dark">Enter your email and password to login</p>
+                            <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl"><%=translationService.translate("Sign in")%></h1>
+                            <p class="text-base font-bold leading-normal text-white-dark"><%=translationService.translate("Enter your email and password to login")%></p>
                         </div>
                         <form class="space-y-5 dark:text-white" method="POST" action="login">
                             <div>
-                                <label for="Email">Email</label>
+                                <label for="Email"><%=translationService.translate("Email")%></label>
                                 <div class="relative text-white-dark">
-                                    <input id="Email" type="email" placeholder="Enter Email" name="login" class="form-input ps-10 placeholder:text-white-dark" />
+                                    <input id="Email" type="email" placeholder="<%=translationService.translate("Enter Email")%>" name="login" class="form-input ps-10 placeholder:text-white-dark" />
                                     <span class="absolute start-4 top-1/2 -translate-y-1/2">
                                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                                                     <path
@@ -129,12 +135,12 @@
                                 </div>
                             </div>
                             <div>
-                                <label for="Password">Password</label>
+                                <label for="Password"><%=translationService.translate("Password")%></label>
                                 <div class="relative text-white-dark">
                                     <input
                                             id="Password"
                                             type="password"
-                                            placeholder="Enter Password"
+                                            placeholder="<%=translationService.translate("Enter Password")%>"
                                             name="password"
                                             class="form-input ps-10 placeholder:text-white-dark"
                                     />
@@ -169,21 +175,21 @@
                                     type="submit"
                                     class="btn btn-gradient !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]"
                             >
-                                Sign in
+                                    <%=translationService.translate("Sign in")%>
                             </button>
                         </form>
 
                         <div class="relative my-7 text-center md:mb-9">
                             <span class="absolute inset-x-0 top-1/2 h-px w-full -translate-y-1/2 bg-white-light dark:bg-white-dark"></span>
-                            <span class="relative bg-white px-2 font-bold uppercase text-white-dark dark:bg-dark dark:text-white-light">or</span>
+                            <span class="relative bg-white px-2 font-bold uppercase text-white-dark dark:bg-dark dark:text-white-light"><%=translationService.translate("or")%></span>
                         </div>
 
                         <div class="text-center dark:text-white">
-                            Don't have an account ?
+                            <%=translationService.translate("Don't have an account ?")%>
                             <a
-                                    href=<%= AppUrlConstants.REGISTRATION_URL%>
+                                    href="<%= AppUrlConstants.REGISTRATION_URL%>"
                                     class="uppercase text-primary underline transition hover:text-black dark:hover:text-white"
-                            >SIGN UP</a
+                            ><%=translationService.translate("Sign up").toUpperCase()%></a
                             >
                         </div>
                     </div>

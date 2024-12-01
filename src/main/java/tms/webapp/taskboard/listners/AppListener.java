@@ -3,8 +3,10 @@ package tms.webapp.taskboard.listners;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
+import tms.webapp.taskboard.configuration.AppConfigurationImpl;
 import tms.webapp.taskboard.updater.DbUpdater;
-import tms.webapp.taskboard.core.configuration.AppSettings;
+
+import java.util.Properties;
 
 @WebListener
 public class AppListener implements ServletContextListener {
@@ -13,7 +15,8 @@ public class AppListener implements ServletContextListener {
 
         System.out.println("Try to apply migrations");
         try {
-            DbUpdater.getInstance().applyMigration();
+            AppConfigurationImpl.getConfiguration().configure(sce);
+            DbUpdater.getInstance().applyMigration(sce);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
