@@ -9,8 +9,6 @@ public final class AppUrlConstants {
     public static final String TASK_STATUS_URL = "/api/task/status";
     public static final String TASK_PRIORITY_URL = "/api/task/priority";
     public static final String LANGUAGE_URL = "/api/languages";
-    public static final String INDEX_URL = "/";
-    public static final String INDEX_URL_JSP = JSP_FORMAT.formatted("/index");
     public static final String LOGOUT_URL = "/logout";
     public static final String LOGIN_URL_JSP = JSP_FORMAT.formatted(LOGIN_URL);
     public static final String REGISTRATION_URL = "/registration";
