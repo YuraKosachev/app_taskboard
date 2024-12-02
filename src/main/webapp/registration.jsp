@@ -1,6 +1,7 @@
 <%@ page import="tms.webapp.taskboard.core.constants.AppUrlConstants" %>
 <%@ page import="tms.webapp.taskboard.factories.ServiceFactory" %>
-<%@ page import="tms.webapp.taskboard.core.interfaces.services.TranslationService" %><%--
+<%@ page import="tms.webapp.taskboard.core.interfaces.services.TranslationService" %>
+<%@ page import="java.util.Optional" %><%--
   Created by IntelliJ IDEA.
   User: HP
   Date: 21.11.2024
@@ -11,6 +12,9 @@
 <%
     TranslationService translationService = ServiceFactory.getTranslationService();
     translationService.setLocale((String)request.getAttribute("language"));
+    String error = Optional.ofNullable(request.getAttribute("error")).isPresent()
+            ? (String) request.getAttribute("error")
+            : null;
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -256,7 +260,9 @@
         Alpine.data('auth', () => ({
             languages: [],
             currentLang:'',
+            error:'<%=error%>',
             init() {
+                this.checkError();
                 fetch( '/api/languages', {
                     method: 'GET'
                 })
@@ -272,7 +278,26 @@
             setLanguage(lang) {
             let qurl = location.href.split('?')[0];
             location.assign(`${'${'}qurl}?lang=${'${'}lang}`);
-        }
+        },
+            checkError(){
+                if(this.error === undefined || this.error == null || this.error ==='null'){
+                    return;
+                }
+                this.showMessage(this.error.replace(';','\n'), 'error');
+            },
+            showMessage(msg = '', type = 'success') {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 3000,
+                });
+                toast.fire({
+                    icon: type,
+                    title: msg,
+                    padding: '10px 20px',
+                });
+            },
         }));
     });
 </script>

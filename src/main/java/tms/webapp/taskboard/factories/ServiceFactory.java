@@ -51,4 +51,8 @@ public final class ServiceFactory {
     public static TranslationService getTranslationService() throws IOException {
         return new TranslationServiceImpl(LocalizationStoreImpl.getInstance());
     }
+
+    public static ValidationService getValidationService() throws IOException {
+        return new ValidationServiceImpl();
+    }
 }

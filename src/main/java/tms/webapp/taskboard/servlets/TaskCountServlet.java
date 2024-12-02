@@ -36,7 +36,7 @@ public class TaskCountServlet extends HttpServlet {
             baseResponse = BaseResponse.getInstance(true,JsonConverter.serialize(map));
 
         } catch (Exception e) {
-            resp.setStatus(400);
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             baseResponse = BaseResponse.getInstance(false, e.getMessage());
         } finally {
             try (PrintWriter pw = resp.getWriter()) {

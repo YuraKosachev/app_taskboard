@@ -37,15 +37,15 @@ public class RegistrationServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        String[] emails = {email};
-        UserService userService = ServiceFactory.getUserService();
-        Optional<User> optionalUser = Optional.ofNullable(userService.find(new UserPredicate(null, emails, null)));
-
-        if(optionalUser.isPresent()) {
-            req.setAttribute("error", "User with same email has already been registered");
-            getServletContext().getRequestDispatcher(AppUrlConstants.REGISTRATION_URL_JSP).forward(req, resp);
-            return;
-        }
+//        String[] emails = {email};
+         UserService userService = ServiceFactory.getUserService();
+//        Optional<User> optionalUser = Optional.ofNullable(userService.find(new UserPredicate(null, emails, null)));
+//
+//        if(optionalUser.isPresent()) {
+//            req.setAttribute("error", "User with same email has already been registered");
+//            getServletContext().getRequestDispatcher(AppUrlConstants.REGISTRATION_URL_JSP).forward(req, resp);
+//            return;
+//        }
 
         try {
             int result = userService.add(fullname, email, password);

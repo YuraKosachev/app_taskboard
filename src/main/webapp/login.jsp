@@ -1,6 +1,7 @@
 <%@ page import="tms.webapp.taskboard.core.constants.AppUrlConstants" %>
 <%@ page import="tms.webapp.taskboard.factories.ServiceFactory" %>
-<%@ page import="tms.webapp.taskboard.core.interfaces.services.TranslationService" %><%--
+<%@ page import="tms.webapp.taskboard.core.interfaces.services.TranslationService" %>
+<%@ page import="java.util.Optional" %><%--
   Created by IntelliJ IDEA.
   User: HP
   Date: 21.11.2024
@@ -10,22 +11,26 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     TranslationService translationService = ServiceFactory.getTranslationService();
-    translationService.setLocale((String)request.getAttribute("language"));
+    translationService.setLocale((String) request.getAttribute("language"));
+    String error = Optional.ofNullable(request.getAttribute("error")).isPresent()
+            ? (String) request.getAttribute("error")
+            : null;
 %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>Todo list | Login </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/perfect-scrollbar.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
-    <link defer rel="stylesheet" type="text/css" media="screen" href="assets/css/animate.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" type="image/x-icon" href="favicon.png"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/perfect-scrollbar.min.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css"/>
+    <link defer rel="stylesheet" type="text/css" media="screen" href="assets/css/animate.css"/>
 
 </head>
 
@@ -40,12 +45,14 @@
         <path
                 d="M67.447 58c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zm9.448 9.447c0 5.523 4.477 10 10 10 5.522 0 10-4.477 10-10s-4.478-10-10-10c-5.523 0-10 4.477-10 10zm-9.448 9.448c-5.523 0-10 4.477-10 10 0 5.522 4.477 10 10 10s10-4.478 10-10c0-5.523-4.477-10-10-10zM58 67.447c0-5.523-4.477-10-10-10s-10 4.477-10 10 4.477 10 10 10 10-4.477 10-10z"
         >
-            <animateTransform attributeName="transform" type="rotate" from="0 67 67" to="-360 67 67" dur="2.5s" repeatCount="indefinite" />
+            <animateTransform attributeName="transform" type="rotate" from="0 67 67" to="-360 67 67" dur="2.5s"
+                              repeatCount="indefinite"/>
         </path>
         <path
                 d="M28.19 40.31c6.627 0 12-5.374 12-12 0-6.628-5.373-12-12-12-6.628 0-12 5.372-12 12 0 6.626 5.372 12 12 12zm30.72-19.825c4.686 4.687 12.284 4.687 16.97 0 4.686-4.686 4.686-12.284 0-16.97-4.686-4.687-12.284-4.687-16.97 0-4.687 4.686-4.687 12.284 0 16.97zm35.74 7.705c0 6.627 5.37 12 12 12 6.626 0 12-5.373 12-12 0-6.628-5.374-12-12-12-6.63 0-12 5.372-12 12zm19.822 30.72c-4.686 4.686-4.686 12.284 0 16.97 4.687 4.686 12.285 4.686 16.97 0 4.687-4.686 4.687-12.284 0-16.97-4.685-4.687-12.283-4.687-16.97 0zm-7.704 35.74c-6.627 0-12 5.37-12 12 0 6.626 5.373 12 12 12s12-5.374 12-12c0-6.63-5.373-12-12-12zm-30.72 19.822c-4.686-4.686-12.284-4.686-16.97 0-4.686 4.687-4.686 12.285 0 16.97 4.686 4.687 12.284 4.687 16.97 0 4.687-4.685 4.687-12.283 0-16.97zm-35.74-7.704c0-6.627-5.372-12-12-12-6.626 0-12 5.373-12 12s5.374 12 12 12c6.628 0 12-5.373 12-12zm-19.823-30.72c4.687-4.686 4.687-12.284 0-16.97-4.686-4.686-12.284-4.686-16.97 0-4.687 4.686-4.687 12.284 0 16.97 4.686 4.687 12.284 4.687 16.97 0z"
         >
-            <animateTransform attributeName="transform" type="rotate" from="0 67 67" to="360 67 67" dur="8s" repeatCount="indefinite" />
+            <animateTransform attributeName="transform" type="rotate" from="0 67 67" to="360 67 67" dur="8s"
+                              repeatCount="indefinite"/>
         </path>
     </svg>
 </div>
@@ -54,7 +61,8 @@
 <div class="fixed bottom-6 right-6 z-50" x-data="scrollToTop">
     <template x-if="showTopButton">
         <button type="button" class="btn btn-outline-primary animate-pulse rounded-full p-2" @click="goToTop">
-            <svg width="24" height="24" class="h-4 w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="24" height="24" class="h-4 w-4" viewBox="0 0 24 24" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
                 <path
                         opacity="0.5"
                         fill-rule="evenodd"
@@ -75,15 +83,17 @@
     <!-- start main content section -->
     <div x-data="auth">
         <div class="absolute inset-0">
-            <img src="assets/images/auth/bg-gradient.png" alt="image" class="h-full w-full object-cover" />
+            <img src="assets/images/auth/bg-gradient.png" alt="image" class="h-full w-full object-cover"/>
         </div>
         <div
                 class="relative flex min-h-screen items-center justify-center bg-[url(../images/auth/map.png)] bg-cover bg-center bg-no-repeat px-6 py-10 dark:bg-[#060818] sm:px-16"
         >
-            <img src="assets/images/auth/coming-soon-object1.png" alt="image" class="absolute left-0 top-1/2 h-full max-h-[893px] -translate-y-1/2" />
-            <img src="assets/images/auth/coming-soon-object2.png" alt="image" class="absolute left-24 top-0 h-40 md:left-[30%]" />
-            <img src="assets/images/auth/coming-soon-object3.png" alt="image" class="absolute right-0 top-0 h-[300px]" />
-            <img src="assets/images/auth/polygon-object.svg" alt="image" class="absolute bottom-0 end-[28%]" />
+            <img src="assets/images/auth/coming-soon-object1.png" alt="image"
+                 class="absolute left-0 top-1/2 h-full max-h-[893px] -translate-y-1/2"/>
+            <img src="assets/images/auth/coming-soon-object2.png" alt="image"
+                 class="absolute left-24 top-0 h-40 md:left-[30%]"/>
+            <img src="assets/images/auth/coming-soon-object3.png" alt="image" class="absolute right-0 top-0 h-[300px]"/>
+            <img src="assets/images/auth/polygon-object.svg" alt="image" class="absolute bottom-0 end-[28%]"/>
             <div
                     class="relative flex w-full max-w-[1502px] flex-col justify-between overflow-hidden rounded-md bg-white/60 backdrop-blur-lg dark:bg-black/50 lg:min-h-[758px] lg:flex-row lg:gap-10 xl:gap-0"
             >
@@ -95,30 +105,35 @@
                     ></div>
                     <div class="ltr:xl:-skew-x-[14deg] rtl:xl:skew-x-[14deg]">
                         <a href="index.html" class="block w-48 lg:w-72 ms-10">
-                            <img src="assets/images/auth/logo-white.svg" alt="Logo" class="w-full" />
+                            <img src="assets/images/auth/logo-white.svg" alt="Logo" class="w-full"/>
                         </a>
                         <div class="mt-24 hidden w-full max-w-[430px] lg:block">
-                            <img src="assets/images/auth/login.svg" alt="Cover Image" class="w-full" />
+                            <img src="assets/images/auth/login.svg" alt="Cover Image" class="w-full"/>
                         </div>
                     </div>
                 </div>
                 <div class="relative flex w-full flex-col items-center justify-center gap-6 px-4 pb-16 pt-6 sm:px-6 lg:max-w-[667px]">
                     <div class="flex w-full max-w-[440px] items-center gap-2 lg:absolute lg:end-6 lg:top-6 lg:max-w-full">
                         <a href="index.html" class="block w-8 lg:hidden">
-                            <img src="assets/images/logo.svg" alt="Logo" class="w-full" />
+                            <img src="assets/images/logo.svg" alt="Logo" class="w-full"/>
                         </a>
-                      <jsp:include page="partial/languages.jsp" />
+                        <jsp:include page="partial/languages.jsp"/>
                     </div>
                     <div class="w-full max-w-[440px] lg:mt-16">
                         <div class="mb-10">
-                            <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl"><%=translationService.translate("Sign in")%></h1>
-                            <p class="text-base font-bold leading-normal text-white-dark"><%=translationService.translate("Enter your email and password to login")%></p>
+                            <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl"><%=translationService.translate("Sign in")%>
+                            </h1>
+                            <p class="text-base font-bold leading-normal text-white-dark"><%=translationService.translate("Enter your email and password to login")%>
+                            </p>
                         </div>
                         <form class="space-y-5 dark:text-white" method="POST" action="login">
                             <div>
-                                <label for="Email"><%=translationService.translate("Email")%></label>
+                                <label for="Email"><%=translationService.translate("Email")%>
+                                </label>
                                 <div class="relative text-white-dark">
-                                    <input id="Email" type="email" placeholder="<%=translationService.translate("Enter Email")%>" name="login" class="form-input ps-10 placeholder:text-white-dark" />
+                                    <input id="Email" type="email"
+                                           placeholder="<%=translationService.translate("Enter Email")%>" name="login"
+                                           class="form-input ps-10 placeholder:text-white-dark"/>
                                     <span class="absolute start-4 top-1/2 -translate-y-1/2">
                                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                                                     <path
@@ -135,7 +150,8 @@
                                 </div>
                             </div>
                             <div>
-                                <label for="Password"><%=translationService.translate("Password")%></label>
+                                <label for="Password"><%=translationService.translate("Password")%>
+                                </label>
                                 <div class="relative text-white-dark">
                                     <input
                                             id="Password"
@@ -175,7 +191,7 @@
                                     type="submit"
                                     class="btn btn-gradient !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]"
                             >
-                                    <%=translationService.translate("Sign in")%>
+                                <%=translationService.translate("Sign in")%>
                             </button>
                         </form>
 
@@ -189,7 +205,8 @@
                             <a
                                     href="<%= AppUrlConstants.REGISTRATION_URL%>"
                                     class="uppercase text-primary underline transition hover:text-black dark:hover:text-white"
-                            ><%=translationService.translate("Sign up").toUpperCase()%></a
+                            ><%=translationService.translate("Sign up").toUpperCase()%>
+                            </a
                             >
                         </div>
                     </div>
@@ -240,23 +257,47 @@
         }));
         Alpine.data('auth', () => ({
             languages: [],
-            currentLang:'',
+            currentLang: '',
+            error:'<%=error%>',
             init() {
-                fetch( '/api/languages', {
+                this.checkError();
+
+                fetch('/api/languages', {
                     method: 'GET'
                 })
                     .then(response => response.json())
-                    .then(result =>{
+                    .then(result => {
                         this.languages = result.langs;
                         this.currentLang = result.current;
                     })
-                    .catch(resons=>{
+                    .catch(resons => {
                         this.showMessage("something went wrong", 'error');
                     });
+            },
+            checkError(){
+
+              if(this.error === undefined || this.error == null || this.error ==='null'){
+                  return;
+              }
+
+                this.showMessage(this.error, 'error');
             },
             setLanguage(lang) {
                 let qurl = location.href.split('?')[0];
                 location.assign(`${'${'}qurl}?lang=${'${'}lang}`);
+            },
+            showMessage(msg = '', type = 'success') {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 3000,
+                });
+                toast.fire({
+                    icon: type,
+                    title: msg,
+                    padding: '10px 20px',
+                });
             }
         }));
 
