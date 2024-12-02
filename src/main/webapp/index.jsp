@@ -1303,7 +1303,6 @@
                 this.allTaskCount = 0;
                 let arr = Object.values(this.taskCounter);
                 for (let i = 0; i < arr.length; i++) {
-                    console.log(arr[i]);
                     this.allTaskCount += arr[i];
                 }
             },

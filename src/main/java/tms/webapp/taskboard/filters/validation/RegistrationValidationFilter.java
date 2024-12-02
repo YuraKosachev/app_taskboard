@@ -37,7 +37,7 @@ public class RegistrationValidationFilter extends HttpFilter {
             chain.doFilter(req, res);
             return;
         }
-        String username = req.getParameter("username");
+        String username = req.getParameter("fullname");
         String email = req.getParameter("email");
 
         ValidationService validationService = ServiceFactory.getValidationService();
