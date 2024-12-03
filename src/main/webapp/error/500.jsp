@@ -9,13 +9,10 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" type="text/css" media="screen" href="assets/css/perfect-scrollbar.min.css" />
-        <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
-        <link defer rel="stylesheet" type="text/css" media="screen" href="assets/css/animate.css" />
-        <script src="assets/js/perfect-scrollbar.min.js"></script>
-        <script defer src="assets/js/popper.min.js"></script>
-        <script defer src="assets/js/tippy-bundle.umd.min.js"></script>
-        <script defer src="assets/js/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/perfect-scrollbar.min.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/style.css" />
+        <link defer rel="stylesheet" type="text/css" media="screen" href="/assets/css/animate.css" />
+
     </head>
 
     <body
@@ -68,7 +65,7 @@
                 >
                     <div class="relative">
                         <img
-                            :src="$store.app.theme === 'dark' || $store.app.isDarkMode ? 'assets/images/error/500-dark.svg' : 'assets/images/error/500-light.svg'"
+                            :src="$store.app.theme === 'dark' || $store.app.isDarkMode ? '/assets/images/error/500-dark.svg' : '/assets/images/error/500-light.svg'"
                             alt="500"
                             class="mx-auto -mt-10 w-full max-w-xs object-cover md:-mt-14 md:max-w-xl"
                         />
@@ -80,13 +77,17 @@
             <!-- end main content section -->
         </div>
 
-        <script src="assets/js/alpine-collaspe.min.js"></script>
-        <script src="assets/js/alpine-persist.min.js"></script>
-        <script defer src="assets/js/alpine-ui.min.js"></script>
-        <script defer src="assets/js/alpine-focus.min.js"></script>
-        <script defer src="assets/js/alpine.min.js"></script>
+        <script src="/assets/js/perfect-scrollbar.min.js"></script>
+        <script defer src="/assets/js/popper.min.js"></script>
+        <script defer src="/assets/js/tippy-bundle.umd.min.js"></script>
+        <script defer src="/assets/js/sweetalert.min.js"></script>
+        <script src="/assets/js/alpine-collaspe.min.js"></script>
+        <script src="/assets/js/alpine-persist.min.js"></script>
+        <script defer src="/assets/js/alpine-ui.min.js"></script>
+        <script defer src="/assets/js/alpine-focus.min.js"></script>
+        <script defer src="/assets/js/alpine.min.js"></script>
 
-        <script src="assets/js/custom.js"></script>
+        <script src="/assets/js/custom.js"></script>
 
         <script>
             // main section

@@ -1252,6 +1252,11 @@
 
                 if (xhr.status != 200) {
                     // обработать ошибку
+                    if(xhr.status == 500){
+                        let url500 = location.origin + "/error/500.jsp";
+                        location.assign(url500);
+                        return;
+                    }
                     alert(xhr.status + ': ' + xhr.statusText);
                 } else {
                     // вывести результат
