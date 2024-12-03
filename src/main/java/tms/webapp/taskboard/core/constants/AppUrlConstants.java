@@ -14,11 +14,15 @@ public final class AppUrlConstants {
     public static final String REGISTRATION_URL = "/registration";
     public static final String REGISTRATION_URL_JSP = JSP_FORMAT.formatted(REGISTRATION_URL);
     public static final String ASSETS_STATIC_URL = "/assets";
+    public static final String ERROR_404_URL = JSP_FORMAT.formatted("error/404");
+    public static final String ERROR_500_URL = JSP_FORMAT.formatted("error/500");
 
     public static final String[] UNAUTHORIZED_URLS = {
             LOGIN_URL,
             REGISTRATION_URL,
             ASSETS_STATIC_URL,
-            LANGUAGE_URL
+            LANGUAGE_URL,
+            ERROR_404_URL,
+            ERROR_500_URL
     };
 }
